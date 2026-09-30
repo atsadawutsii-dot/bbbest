@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iHAVEGPU - ร้านขายคอมพิวเตอร์ออนไลน์</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f6f9;
+            color: #222;
+        }
+
+        /* Header */
+        header {
+            background: #111827;
+            color: white;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            color: #38bdf8;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        nav a:hover {
+            color: #38bdf8;
+        }
+
+        /* Search */
+        .search {
+            padding: 15px 8%;
+            background: white;
+            display: flex;
+            gap: 10px;
+        }
+
+        .search input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        /* Banner */
+        .banner {
+            margin: 25px 8%;
+            padding: 60px 30px;
+            background: linear-gradient(135deg, #0f172a, #2563eb);
+            color: white;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .banner h1 {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .banner p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .banner button {
+            background: #38bdf8;
+            color: #111827;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* Products */
+        .container {
+            padding: 20px 8%;
+        }
+
+        .section-title {
+            font-size: 26px;
+            margin-bottom: 20px;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .product {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            transition: 0.3s;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+        }
+
+        .product img {
+            width: 100%;
+            height: 180px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+
+        .product h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            color: #2563eb;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .product button {
+            background: #2563eb;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .product button:hover {
+            background: #1d4ed8;
+        }
+
+        /* Cart */
+        .cart {
+            background: white;
+            margin: 30px 8%;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        .cart h2 {
+            margin-bottom: 15px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+            gap: 10px;
+        }
+
+        .cart-item button {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .total {
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .checkout {
+            background: #16a34a;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 15px;
+            float: right;
+        }
+
+        /* Footer */
+        footer {
+            background: #111827;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                justify-content: center;
+                text-align: center;
+            }
+
+            nav a {
+                margin: 5px;
+            }
+
+            .banner h1 {
+                font-size: 27px;
+            }
+
+            .cart-item {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">iHAVEGPU</div>
+        <nav>
+            <a href="#">หน้าแรก</a>
+            <a href="#products">สินค้า</a>
+            <a href="#cart">ตะกร้าสินค้า 🛒</a>
+        </nav>
+    </header>
+
+    <!-- Search -->
+    <div class="search">
+        <input type="text" id="searchInput"
+               placeholder="ค้นหาสินค้า เช่น CPU, RAM, การ์ดจอ..."
+               oninput="searchProducts()">
+    </div>
+
+    <!-- Banner -->
+    <section class="banner">
+        <h1>iHAVEGPU</h1>
+        <p>ศูนย์รวมคอมพิวเตอร์และอุปกรณ์ไอทีครบวงจร</p>
+        <button onclick="location.href='#products'">
+            เลือกซื้อสินค้า
+        </button>
+    </section>
+
+    <!-- Products -->
+    <section class="container" id="products">
+        <h2 class="section-title">🔥 สินค้าแนะนำ</h2>
+
+        <div class="products" id="productList">
+
+            <div class="product" data-name="Gaming Chair">
+                <img src="https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products190181_800.jpg"
+                     alt="Gaming Chair">
+                <h3>Gaming Chair</h3>
+                <p>คอมพิวเตอร์สำหรับเล่นเกม</p>
+                <div class="price">฿25,900</div>
+                <button onclick="addToCart('Gaming Chair', 25900)">
+                    เพิ่มลงตะกร้า
+                </button>
+            </div>
+
+            <div class="product" data-name="NOTEBOOK">
+                <img src="https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products60162_800.jpg"
+                     alt="NOTEBOOK">
+                <h3>NOTEBOOK</h3>
+                <p>โน้ตบุ๊กสำหรับทำงาน</p>
+                <div class="price">฿18,900</div>
+                <button onclick="addToCart('NOTEBOOK', 18900)">
+                    เพิ่มลงตะกร้า
+                </button>
+            </div>
+
+            <div class="product" data-name="RTX 4060">
+                <img src="https://storage-asset.msi.com/global/picture/product/product_1689728820bee4166c12b53c656c39ab1b81888843.webp"
+                     alt="RTX 4060">
+                <h3>RTX 4060</h3>
+                <p>การ์ดจอสำหรับเล่นเกม</p>
+                <div class="price">฿11,900</div>
+                <button onclick="addToCart('RTX 4060', 11900)">
+                    เพิ่มลงตะกร้า
+                </button>
+            </div>
+
+            <div class="product" data-name="Gaming Monitor">
+                <img src="https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products189917_800.jpg"
+                     alt="Gaming Monitor">
+                <h3>Gaming Monitor</h3>
+                <p>จอเกมมิ่ง 240Hz</p>
+                <div class="price">฿5,900</div>
+                <button onclick="addToCart('Gaming Monitor', 5900)">
+                    เพิ่มลงตะกร้า
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Cart -->
+    <section class="cart" id="cart">
+        <h2>🛒 ตะกร้าสินค้า</h2>
+        <div id="cartItems">
+            <p>ยังไม่มีสินค้าในตะกร้า</p>
+        </div>
+
+        <div class="total" id="total">
+            รวมทั้งหมด: ฿0
+        </div>
+
+        <button class="checkout" onclick="checkout()">
+            สั่งซื้อสินค้า
+        </button>
+
+        <div style="clear: both;"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 iHAVEGPU</p>
+        <p>ร้านขายคอมพิวเตอร์และอุปกรณ์ไอทีออนไลน์</p>
+    </footer>
+
+    <script>
+        let cart = [];
+
+        // เพิ่มสินค้าลงตะกร้า
+        function addToCart(name, price) {
+            const item = cart.find(product => product.name === name);
+
+            if (item) {
+                item.quantity++;
+            } else {
+                cart.push({
+                    name: name,
+                    price: price,
+                    quantity: 1
+                });
+            }
+
+            renderCart();
+            alert("เพิ่ม " + name + " ลงในตะกร้าแล้ว");
+        }
+
+        // แสดงสินค้าในตะกร้า
+        function renderCart() {
+            const cartItems = document.getElementById("cartItems");
+            const totalElement = document.getElementById("total");
+
+            cartItems.innerHTML = "";
+            let total = 0;
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = "<p>ยังไม่มีสินค้าในตะกร้า</p>";
+            }
+
+            cart.forEach((item, index) => {
+                const subtotal = item.price * item.quantity;
+                total += subtotal;
+
+                cartItems.innerHTML += `
+                    <div class="cart-item">
+                        <span>
+                            ${item.name} x ${item.quantity}
+                            - ฿${subtotal.toLocaleString("th-TH")}
+                        </span>
+                        <button onclick="removeItem(${index})">
+                            ลบ
+                        </button>
+                    </div>
+                `;
+            });
+
+            totalElement.innerText =
+                "รวมทั้งหมด: ฿" + total.toLocaleString("th-TH");
+        }
+
+        // ลบสินค้า
+        function removeItem(index) {
+            cart.splice(index, 1);
+            renderCart();
+        }
+
+        // ค้นหาสินค้า
+        function searchProducts() {
+            const keyword = document
+                .getElementById("searchInput")
+                .value.toLowerCase();
+
+            const products = document.querySelectorAll(".product");
+
+            products.forEach(product => {
+                const name = product.dataset.name.toLowerCase();
+
+                product.style.display =
+                    name.includes(keyword) ? "block" : "none";
+            });
+        }
+
+        // สั่งซื้อสินค้า
+        function checkout() {
+            if (cart.length === 0) {
+                alert("กรุณาเลือกสินค้าก่อนสั่งซื้อ");
+                return;
+            }
+
+            let message = "รายการสั่งซื้อสินค้า\n\n";
+
+            cart.forEach(item => {
+                message += item.name + " x " + item.quantity +
+                    " = ฿" +
+                    (item.price * item.quantity).toLocaleString("th-TH") +
+                    "\n";
+            });
+
+            const total = cart.reduce(
+                (sum, item) => sum + item.price * item.quantity, 0
+            );
+
+            message += "\nรวมทั้งหมด: ฿" + total.toLocaleString("th-TH");
+
+            alert(message + "\n\nขอบคุณที่ใช้บริการ iHAVEGPU");
+        }
+    </script>
+
+</body>
+</html>
+```
